@@ -17,7 +17,7 @@ Date_event <- c(NA,
                     NA, 
                     NA)
 
-Date_of-birth <- c('1936-04-12',
+Date_of_birth <- c('1936-04-12',
                    '1940-03-21',
                    '1938-05-16',
                    '1941-11-03',
@@ -27,21 +27,21 @@ Date_of-birth <- c('1936-04-12',
 
 Id <- c(1,2,3,4,5,6,7)
 
-Dataset <- data.frame(Id, Date_event, Date_shock, Date_of-birth)
-rm(Id, Date_event, Date_shock, Date_of-birth)
+Dataset <- data.frame(Id, Date_event, Date_shock, Date_of_birth)
+rm(Id, Date_event, Date_shock, Date_of_birth)
 
-Dataset$Date_of-birth <- as.Date(Dataset$Date_of-birth)
-Dataset$Leeftijd <- as.Date('2018-01-01') - Dataset$Date_of-birth
-Dataset$Leeftijd <- as.numeric(Dataset$Leeftijd)
+Dataset$Date_of_birth <- as.Date(Dataset$Date_of_birth)
+Dataset$Age <- as.Date('2018-01-01') - Dataset$Date_of_birth
+Dataset$Age <- as.numeric(Dataset$Age)
 
-Dataset$Leeftijdvanaf75 <- Dataset$Leeftijd - (75 * 365.25)
+Dataset$Agefrom75 <- Dataset$Age - (75 * 365.25)
 
 Dataset$Date_event <- as.Date(Dataset$Date_event)
 Dataset$Date_shock <- as.Date(Dataset$Date_shock)
 
 Dataset$Survival <- Dataset$Date_event - as.Date('2018-01-01')
 Dataset$Survival <- as.numeric(Dataset$Survival)
-Dataset$Survival <- Dataset$Leeftijdvanaf75 + Dataset$Survival
+Dataset$Survival <- Dataset$Agefrom75 + Dataset$Survival
 
 Dataset$Cens <- 1
 Dataset$Cens <- replace(Dataset$Cens, 
@@ -49,8 +49,8 @@ Dataset$Cens <- replace(Dataset$Cens,
                             0)
 
 Dataset$Survival_event <- Dataset$Date_shock - as.Date('2018-01-01')
-Dataset$Survival_event <- (Dataset$Leeftijdvanaf75) + Dataset$Survival_event
-Dataset$Survival_event <- as.numeric(Dataset$Survival-event)
+Dataset$Survival_event <- (Dataset$Agefrom75) + Dataset$Survival_event
+Dataset$Survival_event <- as.numeric(Dataset$Survival_event)
 
 Dataset$cens_partner <- c(1,1,1,1,1,1,1)
 Dataset$cens_partner <- replace(Dataset$cens_partner, 
